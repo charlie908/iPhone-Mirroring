@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/icons/phoneview.png" width="112" alt="PhoneView icon">
-  <h1>PhoneView</h1>
-  <p><strong>Experimental iPhone mirroring and control for Apple Vision Pro and Mac.</strong></p>
+  <h1>iPhone Mirroring</h1>
+  <p><strong>Historical umbrella repository for three independent iPhone mirroring prototypes.</strong></p>
   <p>
     <img alt="Status: Experimental" src="https://img.shields.io/badge/status-experimental-orange">
     <img alt="Platforms" src="https://img.shields.io/badge/platforms-iOS%20%7C%20visionOS%20%7C%20macOS-black">
@@ -9,7 +9,16 @@
   </p>
 </div>
 
-PhoneView is an open-source collection of three related prototypes for viewing and controlling an iPhone without having to hold it. Each project addresses a different environment: a bridged Vision Pro setup, a direct Vision Pro connection, or a native Mac window.
+> [!IMPORTANT]
+> Active development is separated into three standalone repositories: **[iPhone Vision with Mac Bridge](https://github.com/charlie908/iPhone-Vision-with-Mac-Bridge)**, **[iPhone Vision Direct](https://github.com/charlie908/iPhone-Vision-Direct)**, and **[Mac iPhone Mirroring for EU Countries](https://github.com/charlie908/Mac-iPhone-Mirroring-for-EU-Countries)**. This umbrella snapshot is retained for context and history.
+
+> [!WARNING]
+> These are early experimental developer prototypes, not equivalents of an Apple-integrated feature. Apple's sandbox, private Continuity technologies, and public-API restrictions mean that third-party implementations must rely on user-approved ReplayKit capture and developer-signed XCTest/DeviceKit automation. Expect more setup, latency, and limitations than software implemented directly by Apple with private system privileges.
+
+> [!CAUTION]
+> The software is provided **as is**, without warranty. To the fullest extent permitted by law, Charles M. and contributors are not responsible for device problems, data loss, service interruption, bugs, or other damage resulting from its use.
+
+This repository began as a collection of three related prototypes for viewing and controlling an iPhone without holding it. Each project addresses a different environment: a bridged Vision Pro setup, a direct Vision Pro connection, or a native Mac window.
 
 The projects use ReplayKit for user-approved screen capture, hardware H.264 encoding/decoding for low latency, and XCTest/DeviceKit automation for input injection. They are developer tools, not App Store-ready applications.
 
@@ -20,9 +29,9 @@ The projects use ReplayKit for user-approved screen capture, hardware H.264 enco
 
 | | Project | Runtime path | Best for | Mac required while using it? |
 |---|---|---|---|---|
-| <img src="assets/icons/phoneview.png" width="56" alt="PhoneView"> | **[PhoneView](projects/phoneview/README.md)** | iPhone → Mac relay → Vision Pro | Stable local-network use with the full Vision Pro interface | Yes |
-| <img src="assets/icons/iphone-direct.png" width="56" alt="iPhone Direct"> | **[iPhone Direct](projects/iphone-direct/README.md)** | iPhone ↔ Vision Pro | Travel, Personal Hotspot, or peer-to-peer use | No, after building/installing |
-| <img src="assets/icons/iphone-mac.png" width="56" alt="iPhone Mac"> | **[iPhone Mac](projects/iphone-mac/README.md)** | iPhone ↔ Mac | Mac-based mirroring and control, including regions where Apple's iPhone Mirroring is unavailable | Yes—the Mac is the viewer |
+| <img src="assets/icons/phoneview.png" width="56" alt="iPhone Vision with Mac Bridge"> | **[iPhone Vision with Mac Bridge](https://github.com/charlie908/iPhone-Vision-with-Mac-Bridge)** | iPhone → Mac relay → Vision Pro | The established Vision Pro experience on one trusted LAN | Yes |
+| <img src="assets/icons/iphone-direct.png" width="56" alt="iPhone Vision Direct"> | **[iPhone Vision Direct](https://github.com/charlie908/iPhone-Vision-Direct)** | iPhone ↔ Vision Pro | Travel, Personal Hotspot, or direct use | No, after building/installing |
+| <img src="assets/icons/iphone-mac.png" width="56" alt="Mac iPhone Mirroring for EU Countries"> | **[Mac iPhone Mirroring for EU Countries](https://github.com/charlie908/Mac-iPhone-Mirroring-for-EU-Countries)** | iPhone ↔ Mac | Mac mirroring and control, especially where Apple's feature is unavailable in Europe or elsewhere | Yes—the Mac is the viewer |
 
 All three projects are deliberately separate. Their app identifiers, ReplayKit extensions, Bonjour services, and control services do not need to replace one another.
 
@@ -30,9 +39,9 @@ All three projects are deliberately separate. Their app identifiers, ReplayKit e
 
 | Project | Version | Status | Tested capabilities |
 |---|---:|---|---|
-| PhoneView | `0.1.0-alpha` | Working prototype | H.264 video, tap, swipe, text, Home, Lock, volume, focus UI, keep-awake |
-| iPhone Direct | `0.1.0-alpha` | Working prototype | Peer-to-peer video and controls, Wi-Fi and iPhone Personal Hotspot |
-| iPhone Mac | `0.1.0-alpha` | Working prototype | Native Mac window, mouse/trackpad gestures, keyboard, resize/move, shortcuts |
+| iPhone Vision with Mac Bridge | `0.1.0-alpha` | Working prototype | H.264 video, tap, swipe, text, Home, Lock, volume, focus UI, keep-awake |
+| iPhone Vision Direct | `0.1.0-alpha` | Working prototype | Peer-to-peer video and controls, Wi-Fi and iPhone Personal Hotspot |
+| Mac iPhone Mirroring for EU Countries | `0.1.0-alpha` | Working prototype | Native Mac window, mouse/trackpad gestures, keyboard, resize/move, shortcuts |
 
 The repository uses an `0.1.0-alpha` release label; individual Xcode targets currently retain their original `1.0`/build `1` metadata. These snapshots work in the original development setup, but installation is still manual and OS/Xcode updates may require changes.
 
@@ -53,16 +62,16 @@ Current project settings target iOS 15/16+, macOS 15.0, and visionOS 27.0 depend
 ```text
                               ┌─────────────────────────┐
                               │ Apple Vision Pro        │
-                    H.264 ───▶│ PhoneView / Direct      │
+                    H.264 ───▶│ Vision Mirror / Direct  │
                     input ◀───│ native viewer           │
                               └─────────────────────────┘
                                 ▲                 ▲
                                 │ Mac relay       │ peer-to-peer
-                                │ (PhoneView)     │ (iPhone Direct)
+                                │ (Vision Mirror) │ (iPhone Direct)
                                 ▼                 ▼
 ┌─────────────────────────┐   H.264/input   ┌─────────────────────────┐
 │ Mac                     │◀───────────────▶│ iPhone                  │
-│ iPhone Mac native app   │                 │ ReplayKit + DeviceKit   │
+│ Mac mirroring app       │                 │ ReplayKit + DeviceKit   │
 └─────────────────────────┘                 └─────────────────────────┘
 ```
 
@@ -83,21 +92,21 @@ Please read [SECURITY.md](SECURITY.md) before running or modifying the projects.
 ```text
 assets/                     Shared icons used by this README
 docs/                       Architecture and project notes
-projects/phoneview/         iPhone + Mac relay + visionOS viewer
+projects/phoneview/         historical iPhone Vision Mirror snapshot
 projects/iphone-direct/     Direct iPhone + visionOS pair
-projects/iphone-mac/        iPhone + native macOS pair
+projects/iphone-mac/        historical Mac iPhone Mirroring snapshot
 .github/                    Issue and pull-request templates
 ```
 
 ## Contributions
 
-Contributions are welcome. Useful areas include easier device discovery, authenticated transport, automatic configuration, audio, landscape handling, latency measurement, reconnect behavior, and clearer installation tooling.
+I am not a professional software developer; these projects are first working drafts created to demonstrate what is possible. Contributions are more than welcome. Useful areas include easier device discovery, authenticated transport, automatic configuration, audio, landscape handling, latency measurement, reconnect behavior, compatibility, accessibility, and clearer installation tooling.
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md). If you distribute a modified or integrated solution, retain the attribution in [NOTICE](NOTICE), as required by the Apache 2.0 licensing terms for this repository's original work.
 
 ## Credits and third-party work
 
-PhoneView was originally developed by **Charles Millet**. See [NOTICE](NOTICE) and [Third-party notices](THIRD-PARTY-NOTICES.md).
+The original prototypes were developed by **Charles M.** See [NOTICE](NOTICE) and [Third-party notices](THIRD-PARTY-NOTICES.md).
 
 The projects build on open development tools including DeviceKit and, for the bridged PhoneView variant, modifications to `ios-web-streamer`. Because the referenced `ios-web-streamer` snapshot does not include an explicit license, this repository provides a patch and bootstrap instructions rather than copying its upstream source.
 
