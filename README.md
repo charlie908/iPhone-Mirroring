@@ -53,7 +53,7 @@ The repository uses an `0.1.0-alpha` release label; individual Xcode targets cur
 - Developer Mode enabled on the iPhone and Apple Vision Pro.
 - The iPhone paired with the development Mac for XCTest/DeviceKit installation.
 - [XcodeGen](https://github.com/yonaskolb/XcodeGen) when regenerating projects from `project.yml`.
-- Python 3.10+ for PhoneView's Mac relay only.
+- Python 3.10+ for the iPhone Vision with Mac Bridge relay only.
 
 Current project settings target iOS 15/16+, macOS 15.0, and visionOS 27.0 depending on the component. Developers may lower deployment targets where the APIs allow it.
 
@@ -62,12 +62,12 @@ Current project settings target iOS 15/16+, macOS 15.0, and visionOS 27.0 depend
 ```text
                               ┌─────────────────────────┐
                               │ Apple Vision Pro        │
-                    H.264 ───▶│ Vision Mirror / Direct  │
+                    H.264 ───▶│ Mac Bridge / Direct     │
                     input ◀───│ native viewer           │
                               └─────────────────────────┘
                                 ▲                 ▲
                                 │ Mac relay       │ peer-to-peer
-                                │ (Vision Mirror) │ (iPhone Direct)
+                                │ (Mac Bridge)    │ (Vision Direct)
                                 ▼                 ▼
 ┌─────────────────────────┐   H.264/input   ┌─────────────────────────┐
 │ Mac                     │◀───────────────▶│ iPhone                  │
@@ -92,9 +92,9 @@ Please read [SECURITY.md](SECURITY.md) before running or modifying the projects.
 ```text
 assets/                     Shared icons used by this README
 docs/                       Architecture and project notes
-projects/phoneview/         historical iPhone Vision Mirror snapshot
-projects/iphone-direct/     Direct iPhone + visionOS pair
-projects/iphone-mac/        historical Mac iPhone Mirroring snapshot
+projects/phoneview/         historical Mac-bridge Vision Pro snapshot
+projects/iphone-direct/     historical direct Vision Pro snapshot
+projects/iphone-mac/        historical Mac mirroring snapshot
 .github/                    Issue and pull-request templates
 ```
 
@@ -108,7 +108,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md). If you distribute a modified or 
 
 The original prototypes were developed by **Charles M.** See [NOTICE](NOTICE) and [Third-party notices](THIRD-PARTY-NOTICES.md).
 
-The projects build on open development tools including DeviceKit and, for the bridged PhoneView variant, modifications to `ios-web-streamer`. Because the referenced `ios-web-streamer` snapshot does not include an explicit license, this repository provides a patch and bootstrap instructions rather than copying its upstream source.
+The projects build on open development tools including DeviceKit and, for the Mac-bridge variant, modifications to `ios-web-streamer`. Because the referenced `ios-web-streamer` snapshot does not include an explicit license, this repository provides a patch and bootstrap instructions rather than copying its upstream source.
 
 ## Disclaimer
 
