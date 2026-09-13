@@ -1,0 +1,34 @@
+name: iPhoneMac
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    macOS: "15.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: YOURTEAMID
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+targets:
+  iPhoneMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: iPhoneMac
+        excludes:
+          - Resources
+      - path: iPhoneMac/Resources
+        buildPhase: resources
+      - path: iPhoneMacControl
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.iphonemac.mac
+        PRODUCT_NAME: iPhone Mac
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: iPhoneMac/Info.plist
+        CODE_SIGN_INJECT_BASE_ENTITLEMENTS: YES
+        ENABLE_HARDENED_RUNTIME: YES
+        COMBINE_HIDPI_IMAGES: YES
+    scheme:
+      gatherCoverageData: false

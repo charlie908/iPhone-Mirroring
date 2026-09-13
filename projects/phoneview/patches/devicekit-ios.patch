@@ -1,0 +1,139 @@
+diff --git a/DeviceKitTests/XCTestServer.swift b/DeviceKitTests/XCTestServer.swift
+index b896a85..f0c4167 100644
+--- a/DeviceKitTests/XCTestServer.swift
++++ b/DeviceKitTests/XCTestServer.swift
+@@ -75,8 +75,9 @@ final class XCTestServer {
+     /// Default port for the WebSocket server.
+     private let defaultPort: UInt16 = 12004
+ 
+-    /// Server binds to localhost only by default. Override with LISTEN_HOST env var.
+-    private let localhost = ProcessInfo.processInfo.environment["DEVICEKIT_LISTEN_HOST"] ?? "127.0.0.1"
++    /// PhoneView needs LAN access from the paired Mac. The environment variable
++    /// can still restrict this to localhost for packaged or automated runs.
++    private let localhost = ProcessInfo.processInfo.environment["DEVICEKIT_LISTEN_HOST"] ?? "0.0.0.0"
+ 
+     private let logger = Logger(
+         subsystem: Bundle.main.bundleIdentifier!,
+@@ -135,4 +136,3 @@ final class XCTestServer {
+         try await server.run()
+     }
+ }
+-
+diff --git a/devicekit-ios.xcodeproj/project.pbxproj b/devicekit-ios.xcodeproj/project.pbxproj
+index 6c950dc..191e10b 100644
+--- a/devicekit-ios.xcodeproj/project.pbxproj
++++ b/devicekit-ios.xcodeproj/project.pbxproj
+@@ -609,7 +609,7 @@
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+ 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+ 				MTL_FAST_MATH = YES;
+ 				ONLY_ACTIVE_ARCH = YES;
+@@ -666,7 +666,7 @@
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				MTL_FAST_MATH = YES;
+ 				SDKROOT = iphoneos;
+@@ -685,7 +685,7 @@
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+-				DEVELOPMENT_TEAM = UWTTLVVSRY;
++				DEVELOPMENT_TEAM = YOURTEAMID;
+ 				GENERATE_INFOPLIST_FILE = YES;
+ 				INFOPLIST_FILE = "";
+ 				INFOPLIST_KEY_CFBundleDisplayName = "Screen Stream";
+@@ -694,13 +694,13 @@
+ 				INFOPLIST_KEY_UIMainStoryboardFile = "";
+ 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+ 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+ 				MARKETING_VERSION = 1.0;
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilenext.devicekit-ios";
++				PRODUCT_BUNDLE_IDENTIFIER = com.example.phoneview.devicekit;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SWIFT_EMIT_LOC_STRINGS = YES;
+@@ -717,7 +717,7 @@
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+-				DEVELOPMENT_TEAM = UWTTLVVSRY;
++				DEVELOPMENT_TEAM = YOURTEAMID;
+ 				GENERATE_INFOPLIST_FILE = YES;
+ 				INFOPLIST_FILE = "";
+ 				INFOPLIST_KEY_CFBundleDisplayName = "Screen Stream";
+@@ -726,13 +726,13 @@
+ 				INFOPLIST_KEY_UIMainStoryboardFile = "";
+ 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+ 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+ 				MARKETING_VERSION = 1.0;
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilenext.devicekit-ios";
++				PRODUCT_BUNDLE_IDENTIFIER = com.example.phoneview.devicekit;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SWIFT_EMIT_LOC_STRINGS = YES;
+@@ -747,9 +747,9 @@
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				CLANG_ENABLE_MODULES = YES;
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+-				CODE_SIGN_STYLE = Manual;
++				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+-				DEVELOPMENT_TEAM = "";
++				DEVELOPMENT_TEAM = YOURTEAMID;
+ 				GENERATE_INFOPLIST_FILE = YES;
+ 				INFOPLIST_KEY_CFBundleDisplayName = "Device Kit";
+ 				LD_RUNPATH_SEARCH_PATHS = (
+@@ -758,9 +758,8 @@
+ 					"@loader_path/Frameworks",
+ 				);
+ 				MARKETING_VERSION = 1.0;
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilenext.devicekit-iosUITests";
++				PRODUCT_BUNDLE_IDENTIFIER = com.example.phoneview.devicekit.uitests;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				PROVISIONING_PROFILE = "";
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+ 				SUPPORTS_MACCATALYST = NO;
+@@ -779,9 +778,9 @@
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				CLANG_ENABLE_MODULES = YES;
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+-				CODE_SIGN_STYLE = Manual;
++				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+-				DEVELOPMENT_TEAM = "";
++				DEVELOPMENT_TEAM = YOURTEAMID;
+ 				GENERATE_INFOPLIST_FILE = YES;
+ 				INFOPLIST_KEY_CFBundleDisplayName = "Device Kit";
+ 				LD_RUNPATH_SEARCH_PATHS = (
+@@ -790,9 +789,8 @@
+ 					"@loader_path/Frameworks",
+ 				);
+ 				MARKETING_VERSION = 1.0;
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobilenext.devicekit-iosUITests";
++				PRODUCT_BUNDLE_IDENTIFIER = com.example.phoneview.devicekit.uitests;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				PROVISIONING_PROFILE = "";
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+ 				SUPPORTS_MACCATALYST = NO;

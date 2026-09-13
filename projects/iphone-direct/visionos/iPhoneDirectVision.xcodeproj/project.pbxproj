@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E7DEF562F7D83215652A4DF /* ControlClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E180BC5A07D987679C5C8D40 /* ControlClient.swift */; };
+		42BD6083DDA15F9FB65A3E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BAFDB5548380065DE7B77E1 /* Assets.xcassets */; };
+		72B5DF6E9DF3ABB4BE355200 /* PhoneViewVisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAEADB188A6B8F09E80F3C7 /* PhoneViewVisionApp.swift */; };
+		75565C0420D4ACBF78BC8EA9 /* DirectPeerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E2DC66A1B50F12BDF9F2F /* DirectPeerTransport.swift */; };
+		808F0A0F8DFDDBA253097A67 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000229F3C1E5C661C3B58011 /* ContentView.swift */; };
+		94B6EE0BF89C2CDCB791975E /* NativeH264StreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D98C8DD687FF84C13AC8F01 /* NativeH264StreamView.swift */; };
+		FAA8AC53D34F7D37C3143F39 /* PhoneStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3382B09D4BA17B5E49DD67B7 /* PhoneStreamView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		000229F3C1E5C661C3B58011 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		151B4B05A6D1057138EF8866 /* iPhoneDirectVision.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iPhoneDirectVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BAFDB5548380065DE7B77E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1E3E2DC66A1B50F12BDF9F2F /* DirectPeerTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectPeerTransport.swift; sourceTree = "<group>"; };
+		3382B09D4BA17B5E49DD67B7 /* PhoneStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneStreamView.swift; sourceTree = "<group>"; };
+		3D98C8DD687FF84C13AC8F01 /* NativeH264StreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeH264StreamView.swift; sourceTree = "<group>"; };
+		6CAEADB188A6B8F09E80F3C7 /* PhoneViewVisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewVisionApp.swift; sourceTree = "<group>"; };
+		7FFDDE42B510601921E48DB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E180BC5A07D987679C5C8D40 /* ControlClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlClient.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		5C798DB85679A6A91419AB5D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				151B4B05A6D1057138EF8866 /* iPhoneDirectVision.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4223C94FAA18945425331BD /* PhoneViewVision */ = {
+			isa = PBXGroup;
+			children = (
+				1BAFDB5548380065DE7B77E1 /* Assets.xcassets */,
+				000229F3C1E5C661C3B58011 /* ContentView.swift */,
+				E180BC5A07D987679C5C8D40 /* ControlClient.swift */,
+				1E3E2DC66A1B50F12BDF9F2F /* DirectPeerTransport.swift */,
+				7FFDDE42B510601921E48DB0 /* Info.plist */,
+				3D98C8DD687FF84C13AC8F01 /* NativeH264StreamView.swift */,
+				3382B09D4BA17B5E49DD67B7 /* PhoneStreamView.swift */,
+				6CAEADB188A6B8F09E80F3C7 /* PhoneViewVisionApp.swift */,
+			);
+			path = PhoneViewVision;
+			sourceTree = "<group>";
+		};
+		EDB0165F835D33B2E15CA860 = {
+			isa = PBXGroup;
+			children = (
+				D4223C94FAA18945425331BD /* PhoneViewVision */,
+				5C798DB85679A6A91419AB5D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		159184DDC2EECFBE06008137 /* iPhoneDirectVision */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8409ACA1D6330C98527FAF9A /* Build configuration list for PBXNativeTarget "iPhoneDirectVision" */;
+			buildPhases = (
+				48E11FE61E0347CD073814FC /* Sources */,
+				11FFCCBB8C35F02FFA4B4310 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iPhoneDirectVision;
+			packageProductDependencies = (
+			);
+			productName = iPhoneDirectVision;
+			productReference = 151B4B05A6D1057138EF8866 /* iPhoneDirectVision.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F1F92193B9656AA44AF4016 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					159184DDC2EECFBE06008137 = {
+						DevelopmentTeam = YOURTEAMID;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 401F306CD44B12093865B978 /* Build configuration list for PBXProject "iPhoneDirectVision" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EDB0165F835D33B2E15CA860;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5C798DB85679A6A91419AB5D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				159184DDC2EECFBE06008137 /* iPhoneDirectVision */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11FFCCBB8C35F02FFA4B4310 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42BD6083DDA15F9FB65A3E10 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		48E11FE61E0347CD073814FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				808F0A0F8DFDDBA253097A67 /* ContentView.swift in Sources */,
+				3E7DEF562F7D83215652A4DF /* ControlClient.swift in Sources */,
+				75565C0420D4ACBF78BC8EA9 /* DirectPeerTransport.swift in Sources */,
+				94B6EE0BF89C2CDCB791975E /* NativeH264StreamView.swift in Sources */,
+				FAA8AC53D34F7D37C3143F39 /* PhoneStreamView.swift in Sources */,
+				72B5DF6E9DF3ABB4BE355200 /* PhoneViewVisionApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		12D519EF77EF56604B34D1B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YOURTEAMID;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		188304214DDD63B99E2CB635 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PhoneViewVision/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.iphonedirect.vision;
+				PRODUCT_NAME = "iPhone Direct";
+				SDKROOT = xros;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Release;
+		};
+		1D4DF21CBE567E995E548FB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YOURTEAMID;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
+		CE7CC510215AA3A44CAEE4B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PhoneViewVision/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.iphonedirect.vision;
+				PRODUCT_NAME = "iPhone Direct";
+				SDKROOT = xros;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		401F306CD44B12093865B978 /* Build configuration list for PBXProject "iPhoneDirectVision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12D519EF77EF56604B34D1B2 /* Debug */,
+				1D4DF21CBE567E995E548FB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8409ACA1D6330C98527FAF9A /* Build configuration list for PBXNativeTarget "iPhoneDirectVision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE7CC510215AA3A44CAEE4B7 /* Debug */,
+				188304214DDD63B99E2CB635 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3F1F92193B9656AA44AF4016 /* Project object */;
+}

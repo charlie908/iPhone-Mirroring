@@ -1,0 +1,119 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - "*.*.*"
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  trivy:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Install trivy
+      env:
+        TRIVY_VERSION: 0.69.3
+      run: |
+        curl -sfL https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_macOS-ARM64.tar.gz | tar xz -C /usr/local/bin trivy
+
+    - name: Run trivy
+      run: trivy fs --severity HIGH,CRITICAL --exit-code 1 .
+
+  build-ipa:
+    needs: [trivy]
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+      with:
+        submodules: recursive
+
+    - name: Build unsigned IPA (real device)
+      run: make ipa-unsigned
+      env:
+        VERSION: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+
+    - name: Upload IPA artifacts
+      uses: actions/upload-artifact@v5
+      if: success()
+      with:
+        name: devicekit-ios-ipa
+        path: build/export/*.ipa
+        retention-days: 4
+
+  build-sim:
+    needs: [trivy]
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+      with:
+        submodules: recursive
+
+    - name: Build simulator zips (arm64 + x86_64)
+      run: make sim-zip
+      env:
+        VERSION: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+
+    - name: Upload simulator zip artifacts
+      uses: actions/upload-artifact@v5
+      if: success()
+      with:
+        name: devicekit-ios-simulator-zips
+        path: build/export/*-Sim-*.zip
+        retention-days: 4
+
+  release:
+    needs: [build-ipa, build-sim]
+    if: github.ref_type == 'tag' && github.event_name == 'push'
+    runs-on: macos-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Download IPA artifacts
+      uses: actions/download-artifact@v5
+      with:
+        name: devicekit-ios-ipa
+
+    - name: Download simulator zip artifacts
+      uses: actions/download-artifact@v5
+      with:
+        name: devicekit-ios-simulator-zips
+
+    - name: Attest build provenance
+      uses: actions/attest-build-provenance@v2
+      with:
+        subject-path: |
+          *.ipa
+          *-Sim-*.zip
+
+    - name: Extract release notes from CHANGELOG.md
+      run: awk -v tag="$GITHUB_REF_NAME" '/^## \[/{f = ($0 ~ "^## \\[" tag "\\]")} f' CHANGELOG.md > release-notes.md
+
+    - name: Upload to GitHub Release
+      uses: softprops/action-gh-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        name: Version ${{ github.ref_name }}
+        body_path: release-notes.md
+        files: |
+          *.ipa
+          *-Sim-*.zip

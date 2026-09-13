@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest an improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: project
+    attributes:
+      label: Project
+      options:
+        - PhoneView
+        - iPhone Direct
+        - iPhone Mac
+        - Shared
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Explain the user problem and suggested behavior.
+    validations:
+      required: true
+

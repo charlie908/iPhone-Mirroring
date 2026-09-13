@@ -1,0 +1,25 @@
+name: iPhoneDirectVision
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    visionOS: "27.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: YOURTEAMID
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "6.0"
+targets:
+  iPhoneDirectVision:
+    type: application
+    platform: visionOS
+    sources:
+      - PhoneViewVision
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.iphonedirect.vision
+        PRODUCT_NAME: iPhone Direct
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: PhoneViewVision/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    scheme:
+      gatherCoverageData: false

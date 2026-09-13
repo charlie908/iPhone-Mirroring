@@ -1,0 +1,138 @@
+import FlyingFox
+import Foundation
+import os
+
+extension String {
+    /// Converts the string to a UInt16 port number.
+    /// - Returns: The port number if conversion succeeds, `nil` otherwise.
+    func toUInt16() -> UInt16? {
+        return UInt16(self)
+    }
+}
+
+// MARK: - WebSocket HTTP & JSON-RPC Server
+
+/// WebSocket server with JSON-RPC 2.0 protocol for UI automation.
+///
+/// This server provides a WebSocket endpoint that accepts JSON-RPC requests
+/// and returns JSON-RPC responses for programmatic device control.
+///
+/// ## Configuration
+/// - **Host**: `127.0.0.1` (localhost only)
+/// - **Port**: `12005` (configurable via `PORT` environment variable)
+/// - **Endpoint**: `ws://127.0.0.1:12005/ws`
+///
+/// ## Starting the Server
+/// ```swift
+/// let server = XCTestServer()
+/// try await server.start()  // Blocks until shutdown
+/// ```
+///
+/// ## JSON-RPC Methods
+///
+/// ### io_tap
+/// Performs a tap or long-press at specified coordinates.
+/// ```json
+/// // Request
+/// {"jsonrpc": "2.0", "method": "io_tap", "params": {"x": 100.0, "y": 200.0}, "id": 1}
+///
+/// // Response
+/// {"jsonrpc": "2.0", "result": {"success": true}, "id": 1}
+/// ```
+///
+/// ### dump_ui
+/// Returns the complete view hierarchy.
+/// ```json
+/// // Request
+/// {"jsonrpc": "2.0", "method": "dump_ui", "params": {"appIds": [], "excludeKeyboardElements": false}, "id": 2}
+///
+/// // Response
+/// {"jsonrpc": "2.0", "result": {"axElement": {...}, "depth": 15}, "id": 2}
+/// ```
+///
+/// ## Client Example (JavaScript)
+/// ```javascript
+/// const ws = new WebSocket('ws://127.0.0.1:12005/ws');
+/// ws.onopen = () => {
+///     ws.send(JSON.stringify({
+///         jsonrpc: '2.0',
+///         method: 'io_tap',
+///         params: { x: 100, y: 200 },
+///         id: 1
+///     }));
+/// };
+/// ws.onmessage = (event) => {
+///     const response = JSON.parse(event.data);
+///     console.log(response);
+/// };
+/// ```
+@MainActor
+final class XCTestServer {
+
+    /// Default timeout for WebSocket operations.
+    private let defaultTimeout: TimeInterval = 100
+
+    /// Default port for the WebSocket server.
+    private let defaultPort: UInt16 = 12005
+
+    /// PhoneView needs LAN access from the paired Mac. The environment variable
+    /// can still restrict this to localhost for packaged or automated runs.
+    private let localhost = ProcessInfo.processInfo.environment["DEVICEKIT_LISTEN_HOST"] ?? "0.0.0.0"
+
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: "XCTestServer"
+    )
+
+    /// JSON-RPC dispatcher for routing method calls.
+    private let dispatcher: JSONRPCDispatcher
+
+    /// Initializes the WebSocket server.
+    init() {
+        self.dispatcher = JSONRPCDispatcher()
+    }
+
+    /// Starts the WebSocket server and blocks until shutdown.
+    ///
+    /// The server creates a WebSocket endpoint at `/rpc` that processes
+    /// JSON-RPC requests and returns responses.
+    ///
+    /// - Throws: An error if the server fails to bind or encounters a runtime error.
+    func start() async throws {
+        let port = ProcessInfo.processInfo.environment["DEVICEKIT_LISTEN_PORT"]?.toUInt16() ?? defaultPort
+        let server = HTTPServer(
+            address: try .inet(ip4: localhost, port: port),
+            timeout: defaultTimeout
+        )
+
+        logger.info("Starting JSON-RPC server on \(self.localhost):\(port)")
+
+        // WebSocket endpoint for JSON-RPC
+        let messageHandler = JSONRPCMessageHandler(dispatcher: dispatcher)
+        let frameHandler = MessageFrameWSHandler(handler: messageHandler)
+        let wsHandler = WebSocketHTTPHandler(handler: frameHandler)
+        await server.appendRoute("GET /ws", to: wsHandler)
+
+        // HTTP POST endpoint for JSON-RPC
+        let httpHandler = JSONRPCHTTPHandler(dispatcher: dispatcher)
+        await server.appendRoute("POST /rpc", to: httpHandler)
+
+        // Health check endpoint (HTTP)
+        await server.appendRoute("GET /health") { _ in
+            HTTPResponse(statusCode: .ok, body: Data("OK".utf8))
+        }
+
+        // Shutdown endpoint — stops the server gracefully
+        await server.appendRoute("POST /shutdown") { _ in
+            Task { await server.stop() }
+            return HTTPResponse(statusCode: .ok, body: Data("OK".utf8))
+        }
+
+        // MJPEG streaming endpoint
+        let mjpegHandler = MJPEGHTTPHandler()
+        await server.appendRoute("GET /mjpeg", to: mjpegHandler)
+
+        logger.info("Server is ready (WebSocket: ws://\(self.localhost):\(port)/ws, HTTP: POST http://\(self.localhost):\(port)/rpc, MJPEG: http://\(self.localhost):\(port)/mjpeg)")
+        try await server.run()
+    }
+}

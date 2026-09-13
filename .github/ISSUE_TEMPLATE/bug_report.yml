@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a reproducible PhoneView problem
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: project
+    attributes:
+      label: Project
+      options:
+        - PhoneView
+        - iPhone Direct
+        - iPhone Mac
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Do not include Apple credentials, UDIDs, private IPs, or unredacted logs.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include device models, OS versions, Xcode version, and network type.
+    validations:
+      required: true
+
